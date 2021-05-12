@@ -1,0 +1,1 @@
+worker: python studybot2.py
