@@ -1,6 +1,9 @@
 import discord
+from discord.ext import commands
 
 import os
+
+bot = commands.Bot(command_prefix='$')
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -9,6 +12,10 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         print('Message from {0.author}: {0.content}'.format(message))
 
+@bot.command()
+async def test(ctx, arg):
+    await ctx.send(arg)
+    
 token = os.environ.get('BOT_TOKEN')
 
 
