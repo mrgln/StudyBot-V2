@@ -31,5 +31,9 @@ token = os.environ.get('BOT_TOKEN')
 @studybot.command()
 async def ping(ctx):
     await ctx.send('pong')
+    
+@studybot.command()
+async def ping(ctx):
+    await ctx.send('https://wmpics.pics/di-PPUG.png')
 
 studybot.run(str(token))
