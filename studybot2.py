@@ -33,7 +33,7 @@ async def ping(ctx):
     await ctx.send('pong')
     
 @studybot.command()
-async def ping(ctx):
+async def img(ctx):
     await ctx.send('https://wmpics.pics/di-PPUG.png')
 
 studybot.run(str(token))
