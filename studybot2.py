@@ -22,6 +22,7 @@
 
 # client.run(str(token))
 import os
+import random
 import discord
 from discord.ext import commands
 
@@ -30,8 +31,13 @@ token = os.environ.get('BOT_TOKEN')
 
 @studybot.command()
 async def ping(ctx):
-    await ctx.send('pong')
-    
+    a = random.randint(0,4)
+    b = 1
+    if b == a:
+        await ctx.send("gg i've lost 🏓")
+    else:
+        await ctx.send('pong 🏓')
+
 @studybot.command()
 async def img(ctx):
     await ctx.send('https://wmpics.pics/di-PPUG.png')
