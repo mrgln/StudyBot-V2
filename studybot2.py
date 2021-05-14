@@ -30,20 +30,28 @@ async def ping(ctx):
 async def rnd(ctx, a: int, b: int):
     """☄️"""
     number = random.randint(a,b)
-    await ctx.send(number)
+    await ctx.send(f"Your number is {number}")
 
 
 @studybot.command()
-async def math(ctx, left: int, symbol: chr, right: int):
+async def add(ctx, left: int, right: int):
     """☄️"""
-    if symbol=='*':
-        await ctx.send(left * right)
-    elif symbol == '+':
-        await ctx.send(left + right)
-    elif symbol == '-':
-        await ctx.send(left - right)
-    else:
-        await ctx.send(left / right)
+    await ctx.send(f"{left} + {right} = {left + right}")
+    
+@studybot.command()
+async def mply(ctx, left: int, right: int):
+    """☄️"""
+    await ctx.send(f"{left} * {right} = {left * right}")
+
+@studybot.command()
+async def div(ctx, left: int, right: int):
+    """☄️"""
+    await ctx.send(f"{left} / {right} = {left / right}")
+
+@studybot.command()
+async def sub(ctx, left: int, right: int):
+    """☄️"""
+    await ctx.send(f"{left} - {right} = {left - right}")
 
 
 @studybot.command()
@@ -54,9 +62,9 @@ async def sau(ctx):
 
 @studybot.command()
 async def help(ctx):
-    embed = discord.Embed(title="StudyBot V2", timestamp=datetime.datetime.utcnow(), color=discord.Color.red())
+    embed = discord.Embed(title="StudyBot V2", description = 'prefix is "="', timestamp=datetime.datetime.utcnow(), color=discord.Color.red())
     embed.add_field(name="🎲 Fun Commands", value="`ping` `rnd`", inline=False)
-    embed.add_field(name="🖩 Math Commands", value="`math`",inline=False)
+    embed.add_field(name="🖩 Math Commands", value="`add` `sub` `mply` `div`",inline=False)
     embed.add_field(name="📋 Schedule Commands", value="sau",inline=False)
     embed.set_image(url='https://avatanplus.ru/files/resources/original/58dd307a43fb515b20055da6.jpg')
     embed.set_footer(text='made by mrgln with <3')
