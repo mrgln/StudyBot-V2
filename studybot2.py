@@ -46,7 +46,7 @@ async def ping(ctx):
 
 @studybot.command(pass_context = True)
 async def guess(ctx):
-    number = random.randint(1,6)
+    number = random.randint(1,499)
     guess = 5
     win = False
     await ctx.send("`У тебя есть пять попыток чтобы угадать число от 1 до 500, выиграешь - получишь роль 'пророк' и будешь находиться отдельно среди списка участников сервера`\nНапиши число:")
@@ -64,10 +64,6 @@ async def guess(ctx):
         elif attempt == number:
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
-            user =ctx.message.author
-            role = get(guild.roles, id=817829493929803776)
-            await asyncio.sleep(1)
-            await client.add_roles(user,role)
             break
     if win == False:
         await ctx.send(f'`Число ->{number}`')
