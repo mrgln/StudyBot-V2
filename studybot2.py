@@ -33,20 +33,23 @@ async def ping(ctx):
 async def guess(ctx):
     number = random.randint(1,499)
     guess = 5
+    await ctx.send("`У тебя есть пять попыток чтобы угадать число от 1 до 500, выиграешь - получишь роль 'пророк' и будешь находиться отдельно среди списка участников сервера`\nНапиши число:")
     while guess != 0:
-        await ctx.send('Pick a number between 1 and 500')
         msg = await studybot.wait_for('message',check=check,timeout=30)
         attempt = int(msg.content)
         if attempt>number:
-            await ctx.send('Try going lower')
+            await ctx.send("`мало`")
             await asyncio.sleep(1)
             guess -=1
         elif attempt<number:
-            await ctx.send('Try going higher')
+            await ctx.send("`много`")
             await asyncio.sleep(1)
             guess -=1
+        elif guess == 0:
+            await ctx.send(f'Число ->{number}')
+            await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
         elif attempt == number:
-            await ctx.send('You guessed it!')
+            await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             break
         
 
