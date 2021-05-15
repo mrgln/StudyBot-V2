@@ -41,7 +41,6 @@ async def ping(ctx):
 
 
 @studybot.command(pass_context = True)
-@commands.has_role("Admin")
 async def guess(ctx):
     number = random.randint(1,6)
     guess = 5
