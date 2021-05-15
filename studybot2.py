@@ -4,6 +4,7 @@ import random
 import datetime
 import discord
 from discord.ext import commands
+from discord.utils import get
 from discord.ext.commands.core import check
 
 description = "can stay alive without mrgln"
@@ -61,7 +62,7 @@ async def guess(ctx):
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             user =ctx.message.author
-            role = discord.utils.get(user.server.roles, name="пророк")
+            role = discord.utils.get(user.server.roles, name="Prorok")
             await studybot.add_roles(user,role)
             break
     if win == False:
