@@ -9,11 +9,9 @@ description = "can stay alive without mrgln"
 studybot = commands.Bot(
     command_prefix='=',
     description = description,
-    help_command = None
-    )
+    help_command = None)
 
 token = os.environ.get('BOT_TOKEN')
-
 
 
 @studybot.command()
@@ -25,32 +23,34 @@ async def ping(ctx):
     else:
         await ctx.send('pong 🏓')
 
+async def on_message(self, message):
+        # we do not want the bot to reply to itself
+        if message.author.id == self.user.id:
+            return
+
+        if message.content.startswith('=hello'):
+            await message.reply('Hello!', mention_author=True)
 
 @studybot.command()
 async def rnd(ctx, a: int, b: int):
-    """☄️"""
     number = random.randint(a,b)
     await ctx.send(f"Your number is {number}")
 
 
 @studybot.command()
 async def add(ctx, left: int, right: int):
-    """☄️"""
     await ctx.send(f"{left} + {right} = {left + right}")
     
 @studybot.command()
 async def mply(ctx, left: int, right: int):
-    """☄️"""
     await ctx.send(f"{left} * {right} = {left * right}")
 
 @studybot.command()
 async def div(ctx, left: int, right: int):
-    """☄️"""
     await ctx.send(f"{left} / {right} = {left / right}")
 
 @studybot.command()
 async def sub(ctx, left: int, right: int):
-    """☄️"""
     await ctx.send(f"{left} - {right} = {left - right}")
 
 
@@ -70,8 +70,6 @@ async def help(ctx):
     embed.set_footer(text='made by mrgln with <3')
     #embed.set_thumbnail(url="https://pluralsight.imgix.net/paths/python-7be70baaac.png")
     await ctx.send(embed=embed)
-
-
 
 
 @studybot.command()
