@@ -45,9 +45,9 @@ async def guess(ctx):
             await ctx.send("`много`")
             await asyncio.sleep(1)
             guess -=1
-        elif guess == 0:
-            await ctx.send(f'Число ->{number}')
-            await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
+        # elif guess == 1:
+        #     await ctx.send(f'Число ->{number}')
+        #     await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
         elif attempt == number:
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             break
