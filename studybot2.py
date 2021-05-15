@@ -2,6 +2,7 @@ import os
 import random
 import datetime
 import discord
+from discord import client
 from discord.ext import commands
 
 description = "can stay alive without mrgln"
@@ -23,13 +24,12 @@ async def ping(ctx):
     else:
         await ctx.send('pong 🏓')
 
-async def on_message(self, message):
-        # we do not want the bot to reply to itself
-        if message.author.id == self.user.id:
-            return
+@studybot.command()
+async def guess(ctx):
+    await ctx.send("bruh")
+    message = await ctx.wait_for('message')
+    await ctx.send(message)
 
-        if message.content.startswith('=hello'):
-            await message.reply('Hello!', mention_author=True)
 
 @studybot.command()
 async def rnd(ctx, a: int, b: int):
