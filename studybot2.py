@@ -61,8 +61,8 @@ async def guess(ctx):
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             member = ctx.message.author
-            role = discord.utils.get(member.guild.roles, name="пророк")
-            await member.add_roles(discord.utils.get(member.guild.roles, name=role))
+            role = discord.utils.get(member.server.roles, name="пророк")
+            await member.add_role(role)
             break
     if win == False:
         await ctx.send(f'`Число ->{number}`')
