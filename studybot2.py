@@ -41,6 +41,7 @@ async def ping(ctx):
 
 
 @studybot.command(pass_context = True)
+@studybot.has_role("Admin")
 async def guess(ctx):
     number = random.randint(1,6)
     guess = 5
@@ -60,9 +61,9 @@ async def guess(ctx):
         elif attempt == number:
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
-            member = ctx.message.author
-            role = discord.utils.get(member.server.roles, name="пророк")
-            await member.add_role(role)
+            user =ctx.message.author
+            role = discord.utils.get(user.server.roles, name="пророк")
+            await studybot.add_roles(user,role)
             break
     if win == False:
         await ctx.send(f'`Число ->{number}`')
