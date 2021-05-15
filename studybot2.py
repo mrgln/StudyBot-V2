@@ -61,8 +61,8 @@ async def guess(ctx):
         elif attempt == number:
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
-            user =ctx.message.author
-            role = discord.utils.get(user.server.roles, name="Prorok")
+            user =ctx.author
+            role = discord.utils.get(user.server.roles, name=817829493929803776)
             await studybot.add_roles(user,role)
             break
     if win == False:
