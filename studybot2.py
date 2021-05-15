@@ -3,7 +3,6 @@ import os
 import random
 import datetime
 import discord
-from discord import client
 from discord.ext import commands
 from discord.ext.commands.core import check
 
@@ -38,11 +37,11 @@ async def guess(ctx):
         msg = await studybot.wait_for('message',check=check,timeout=30)
         attempt = int(msg.content)
         if attempt>number:
-            await ctx.send("`мало`")
+            await ctx.send("`много`")
             await asyncio.sleep(1)
             guess -=1
         elif attempt<number:
-            await ctx.send("`много`")
+            await ctx.send("`мало`")
             await asyncio.sleep(1)
             guess -=1
         # elif guess == 1:
@@ -51,7 +50,6 @@ async def guess(ctx):
         elif attempt == number:
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             break
-        
 
 @studybot.command()
 async def rnd(ctx, a: int, b: int):
