@@ -3,6 +3,7 @@ import os
 import random
 import datetime
 import discord
+from discord import guild
 from discord.ext import commands
 from discord.utils import get
 from discord.ext.commands.core import check
@@ -61,8 +62,8 @@ async def guess(ctx):
         elif attempt == number:
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
-            user =ctx.author
-            role = discord.utils.get(user.server.roles, name=817829493929803776)
+            user =ctx.message.author
+            role = get(guild.roles, id=817829493929803776)
             await studybot.add_roles(user,role)
             break
     if win == False:
