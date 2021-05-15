@@ -32,6 +32,7 @@ async def ping(ctx):
 async def guess(ctx):
     number = random.randint(1,499)
     guess = 5
+    win = False
     await ctx.send("`У тебя есть пять попыток чтобы угадать число от 1 до 500, выиграешь - получишь роль 'пророк' и будешь находиться отдельно среди списка участников сервера`\nНапиши число:")
     while guess != 0:
         msg = await studybot.wait_for('message',check=check,timeout=30)
@@ -44,17 +45,20 @@ async def guess(ctx):
             await ctx.send("`мало`")
             await asyncio.sleep(1)
             guess -=1
-        # elif guess == 1:
-        #     await ctx.send(f'Число ->{number}')
-        #     await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
         elif attempt == number:
+            win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
             break
+    if win == False:
+        await ctx.send(f'Число ->{number}')
+        await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
+
 
 @studybot.command()
 async def rnd(ctx, a: int, b: int):
     number = random.randint(a,b)
     await ctx.send(f"Your number is {number}")
+
 
 
 @studybot.command()
@@ -74,6 +78,7 @@ async def sub(ctx, left: int, right: int):
     await ctx.send(f"{left} - {right} = {left - right}")
 
 
+
 @studybot.command()
 async def sau(ctx):
     await ctx.send('https://wmpics.pics/di-Q6XMW.png')
@@ -83,7 +88,7 @@ async def sau(ctx):
 @studybot.command()
 async def help(ctx):
     embed = discord.Embed(title="StudyBot V2", description = 'prefix is "="', timestamp=datetime.datetime.utcnow(), color=discord.Color.red())
-    embed.add_field(name="🎲 Fun Commands", value="`ping` `rnd`", inline=False)
+    embed.add_field(name="🎲 Fun Commands", value="`ping` `rnd` `guess`", inline=False)
     embed.add_field(name="🖩 Math Commands", value="`add` `sub` `mply` `div`",inline=False)
     embed.add_field(name="📋 Schedule Commands", value="sau",inline=False)
     embed.set_image(url='https://avatanplus.ru/files/resources/original/58dd307a43fb515b20055da6.jpg')
