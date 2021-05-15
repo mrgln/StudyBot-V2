@@ -15,6 +15,17 @@ studybot = commands.Bot(
 
 token = os.environ.get('BOT_TOKEN')
 
+def check(author):
+    def inner_check(message): 
+        if message.author != author:
+            return False
+        try: 
+            int(message.content) 
+            return True 
+        except ValueError: 
+            return False
+    return inner_check
+
 @studybot.event
 async def on_ready():
     await studybot.change_presence(activity = discord.Game('жизнь (префикс "=")'))
@@ -28,14 +39,15 @@ async def ping(ctx):
     else:
         await ctx.send('pong 🏓')
 
+
 @studybot.command(pass_context = True)
 async def guess(ctx):
-    number = random.randint(1,499)
+    number = random.randint(1,6)
     guess = 5
     win = False
     await ctx.send("`У тебя есть пять попыток чтобы угадать число от 1 до 500, выиграешь - получишь роль 'пророк' и будешь находиться отдельно среди списка участников сервера`\nНапиши число:")
     while guess != 0:
-        msg = await studybot.wait_for('message',check=check,timeout=30)
+        msg = await studybot.wait_for('message',check=check(ctx.author),timeout=30)
         attempt = int(msg.content)
         if attempt>number:
             await ctx.send("`много`")
@@ -48,9 +60,12 @@ async def guess(ctx):
         elif attempt == number:
             win = True
             await ctx.send("`Ура ты обладаешь силами ванги, поздравляю!`:partying_face:")
+            member = ctx.message.author
+            role = discord.utils.get(member.server.roles, name="пророк")
+            await studybot.add_roles(member, role)
             break
     if win == False:
-        await ctx.send(f'Число ->{number}')
+        await ctx.send(f'`Число ->{number}`')
         await ctx.send("`Не расстраивайся, ты еще сможешь угадать`:wink:")
 
 
