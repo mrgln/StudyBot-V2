@@ -1,9 +1,11 @@
+import asyncio
 import os
 import random
 import datetime
 import discord
 from discord import client
 from discord.ext import commands
+from discord.ext.commands.core import check
 
 description = "can stay alive without mrgln"
 
@@ -14,6 +16,9 @@ studybot = commands.Bot(
 
 token = os.environ.get('BOT_TOKEN')
 
+@studybot.event
+async def on_ready():
+    await studybot.change_presence(activity = discord.Game('жизнь (префикс "=")'))
 
 @studybot.command()
 async def ping(ctx):
@@ -24,12 +29,26 @@ async def ping(ctx):
     else:
         await ctx.send('pong 🏓')
 
-@studybot.command()
+@studybot.command(pass_context = True)
 async def guess(ctx):
-    await ctx.send("bruh")
-    message = await ctx.wait_for('message')
-    await ctx.send(message)
-
+    number = random.randint(1,499)
+    guess = 5
+    while guess != 0:
+        await ctx.send('Pick a number between 1 and 500')
+        msg = await studybot.wait_for('message',check=check,timeout=30)
+        attempt = int(msg.content)
+        if attempt>number:
+            await ctx.send('Try going lower')
+            await asyncio.sleep(1)
+            guess -=1
+        elif attempt<number:
+            await ctx.send('Try going higher')
+            await asyncio.sleep(1)
+            guess -=1
+        elif attempt == number:
+            await ctx.send('You guessed it!')
+            break
+        
 
 @studybot.command()
 async def rnd(ctx, a: int, b: int):
